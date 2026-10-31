@@ -18,4 +18,7 @@ export class InventoryItem {
   }
 
   // TODO
+
+  get stockValue(): number { return this.quantityOnHand * this.unitCost; }
+  get formattedStockValue(): string { return '$' + this.stockValue.toFixed(2); }
 }

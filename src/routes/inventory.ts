@@ -14,6 +14,7 @@ export function filterItems(items: InventoryItem[], status: Status): InventoryIt
     return items.filter((i) => !i.discontinued);
   }
   // TODO
+  if (status === 'lowStock') { return items.filter((i) => i.isLowStock); }
   return items;
 }
 
@@ -44,6 +45,7 @@ router.get('/', (req, res) => {
   res.json({
     filter: status,
     count: filtered.length,
+    totalStockValue: Number(filtered.reduce((sum, i) => sum + i.stockValue, 0).toFixed(2)),
     // TODO
     items: filtered.map(toDto),
   });
